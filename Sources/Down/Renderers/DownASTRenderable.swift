@@ -49,7 +49,7 @@ extension DownASTRenderable {
     public func toDocument(_ options: DownOptions = .default,
                            commonmarkOptions: CommonmarkOptions = .default) -> Document {
         let convertOptions = ConvertOptions(parseOptions: ConvertOptions.defaultParseOptions,
-                                            commonmarkOptions: [.hardBreaks],
+                                            commonmarkOptions: commonmarkOptions,
                                             extensions: ConvertOptions.defaultCommonmarkExtensions)
         return Document(parsing: markdownString, convertOptions: convertOptions)
     }
