@@ -66,7 +66,8 @@ extension DownAttributedStringRenderable {
                                    commonmarkOptions: CommonmarkOptions = .default,
                                    styler: Styler) throws -> NSAttributedString {
         let document = self.toDocument(options, commonmarkOptions: commonmarkOptions)
-        var visitor = AttributedStringVisitor(styler: styler, options: options)
+        var visitor = AttributedStringVisitor(styler: styler, options: options,
+                                              commonmarkOptions: commonmarkOptions)
         return document.accept(&visitor)
     }
 

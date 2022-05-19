@@ -23,6 +23,7 @@ public struct AttributedStringVisitor {
 
     private let styler: Styler
     private let options: DownOptions
+    private let commonmarkOptions: CommonmarkOptions
     private let listPrefixGeneratorBuilder: ListPrefixGeneratorBuilder
     private var listPrefixGenerators = [ListItemPrefixGenerator]()
 
@@ -36,10 +37,12 @@ public struct AttributedStringVisitor {
     public init(
         styler: Styler,
         options: DownOptions = .default,
+        commonmarkOptions: CommonmarkOptions = .default,
         listPrefixGeneratorBuilder: @escaping ListPrefixGeneratorBuilder = { StaticListItemPrefixGenerator(list: $0) }
     ) {
         self.styler = styler
         self.options = options
+        self.commonmarkOptions = commonmarkOptions
         self.listPrefixGeneratorBuilder = listPrefixGeneratorBuilder
     }
 
@@ -169,8 +172,7 @@ extension AttributedStringVisitor: MarkupVisitor {
     }
 
     public func visitSoftBreak(_ node: SoftBreak) -> NSMutableAttributedString {
-//        let result = (options.contains(.hardBreaks) ? String.lineSeparator : " ").attributed
-        let result = " ".attributed
+        let result = (commonmarkOptions.contains(.hardBreaks) ? String.lineSeparator : " ").attributed
         styler.style(softBreak: result)
         return result
     }
