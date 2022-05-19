@@ -16,7 +16,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-markdown.git", .branch("main")),
+        .package(url: "https://github.com/Semty/swift-markdown.git", .branch("dev")),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing.git", from: "1.9.0"),
     ],
     targets: [

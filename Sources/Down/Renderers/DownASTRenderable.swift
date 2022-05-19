@@ -14,7 +14,7 @@ import Markdown
 
 public protocol DownASTRenderable: DownRenderable {
 
-    func toDocument(_ options: DownOptions) -> Document
+    func toDocument(_ options: DownOptions, commonmarkOptions: CommonmarkOptions) -> Document
 
 }
 
@@ -46,8 +46,12 @@ extension DownASTRenderable {
     /// - Throws:
     ///     `MarkdownToASTError` if conversion fails.
 
-    public func toDocument(_ options: DownOptions = .default) -> Document {
-        return Document(parsing: markdownString)
+    public func toDocument(_ options: DownOptions = .default,
+                           commonmarkOptions: CommonmarkOptions = .default) -> Document {
+        let convertOptions = ConvertOptions(parseOptions: ConvertOptions.defaultParseOptions,
+                                            commonmarkOptions: [.hardBreaks],
+                                            extensions: ConvertOptions.defaultCommonmarkExtensions)
+        return Document(parsing: markdownString, convertOptions: convertOptions)
     }
 
 }

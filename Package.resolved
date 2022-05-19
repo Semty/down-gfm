@@ -12,10 +12,10 @@
       },
       {
         "package": "swift-markdown",
-        "repositoryURL": "https://github.com/apple/swift-markdown.git",
+        "repositoryURL": "https://github.com/Semty/swift-markdown.git",
         "state": {
-          "branch": "main",
-          "revision": "caafc56d3794a08c2203fe417b3aff81e2ab2fc1",
+          "branch": "dev",
+          "revision": "8dcefe806c4d7217563c8a129300035da7edf8ce",
           "version": null
         }
       },

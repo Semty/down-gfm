@@ -14,7 +14,7 @@ import Markdown
 public protocol DownAttributedStringRenderable: DownHTMLRenderable, DownASTRenderable {
 
     func toAttributedString(_ options: DownOptions, stylesheet: String?) throws -> NSAttributedString
-    func toAttributedString(_ options: DownOptions, styler: Styler) throws -> NSAttributedString
+    func toAttributedString(_ options: DownOptions, commonmarkOptions: CommonmarkOptions, styler: Styler) throws -> NSAttributedString
 
 }
 
@@ -62,8 +62,10 @@ extension DownAttributedStringRenderable {
     /// - Throws:
     ///     `DownErrors` depending on the scenario.
 
-    public func toAttributedString(_ options: DownOptions = .default, styler: Styler) throws -> NSAttributedString {
-        let document = self.toDocument(options)
+    public func toAttributedString(_ options: DownOptions = .default,
+                                   commonmarkOptions: CommonmarkOptions = .default,
+                                   styler: Styler) throws -> NSAttributedString {
+        let document = self.toDocument(options, commonmarkOptions: commonmarkOptions)
         var visitor = AttributedStringVisitor(styler: styler, options: options)
         return document.accept(&visitor)
     }
