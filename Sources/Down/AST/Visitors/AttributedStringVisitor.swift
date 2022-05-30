@@ -105,19 +105,23 @@ extension AttributedStringVisitor: MarkupVisitor {
         let result = visitChildren(node.children).joined
 
         let prefix: String
+        let prefixLength: Int
         if let checkbox = node.checkbox {
-            prefix = checkbox == .checked ? "☒" : "☐"
+            prefix = checkbox == .checked ? "☑" : "☐"
+            prefixLength = 2
         } else if let generated = listPrefixGenerators.last?.next() {
             prefix = generated
+            prefixLength = (prefix as NSString).length
         } else {
             prefix = "•"
+            prefixLength = 2
         }
         let attributedPrefix = "\(prefix)\t".attributed
         styler.style(listItemPrefix: attributedPrefix)
         result.insert(attributedPrefix, at: 0)
 
         if node.hasSuccessor { result.append(.paragraphSeparator) }
-        styler.style(item: result, prefixLength: (prefix as NSString).length)
+        styler.style(item: result, prefixLength: prefixLength)
         return result
     }
 
